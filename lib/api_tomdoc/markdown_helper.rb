@@ -9,7 +9,7 @@ class ApiTomdoc::MarkdownHelper
   end
 
   def self.p(text)
-    "\n#{text}\n"
+    "\n#{text.gsub(/[\n]+/, " ")}\n"
   end
 
   def self.code(text, language = nil)
