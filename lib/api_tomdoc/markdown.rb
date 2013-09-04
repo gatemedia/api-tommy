@@ -1,4 +1,4 @@
-class ApiTomdoc::MarkdownHelper
+class ApiTomdoc::Markdown
 
   1.upto(6).each do |level|
     self.class.send(:define_method, "h#{level}") { |text| title(text, level) }

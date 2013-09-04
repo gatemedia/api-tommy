@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class ApiTomdoc::MarkdownHelperTest < ActiveSupport::TestCase
+class ApiTomdoc::MarkdownTest < ActiveSupport::TestCase
 
   def setup
-    @h = ApiTomdoc::MarkdownHelper
+    @h = ApiTomdoc::Markdown
   end
 
   1.upto(6).each do |level|
