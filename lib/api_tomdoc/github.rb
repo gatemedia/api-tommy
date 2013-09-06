@@ -23,7 +23,7 @@ module ApiTomdoc
 
     def clone_wiki(dir)
       git = Grit::Git.new('/tmp/filling-in')
-      git.clone(wiki_url, dir)
+      git.clone({}, wiki_url, dir)
     end
 
     def update_file(dir, file, content)
@@ -34,7 +34,7 @@ module ApiTomdoc
       repo = Grit::Repo.new(dir)
       Dir.chdir(dir) { repo.add(file) }
       repo.commit_index("Update #{file}")
-      repo.git.push('origin', 'master')
+      repo.git.push({}, 'origin', 'master')
     end
   end
 end

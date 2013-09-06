@@ -16,7 +16,7 @@ module ApiTomdoc
     test 'can clone a github wiki' do
       Grit::Repo.any_instance.stubs(:config).returns('remote.origin.url' => 'https://github.com/rails-api/rails-api.git')
       Dir.mktmpdir('api_tomdoc') do |dir|
-        Grit::Git.any_instance.expects(:clone).with('https://github.com/rails-api/rails-api.wiki.git', dir)
+        Grit::Git.any_instance.expects(:clone).with({}, 'https://github.com/rails-api/rails-api.wiki.git', dir)
         @g.clone_wiki(dir)
       end
     end
@@ -35,7 +35,7 @@ module ApiTomdoc
       Dir.mktmpdir(['api_tomdoc', '.git']) do |dir|
         repo = Grit::Repo.new(dir)
         @g.update_file(dir, filename, 'foo')
-        Grit::Git.any_instance.stubs(:push).with('origin', 'master')
+        Grit::Git.any_instance.stubs(:push).with({}, 'origin', 'master')
         @g.push(dir, filename)
       end
     end
