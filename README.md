@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-Here is the requirements in order to have a happy tommy (pun intended):
+Here is the requirements in order to have an happy tommy (pun intended):
 
 * The better place to document your API is your controllers.
 * Each class/method is documented using [TomDoc](http://tomdoc.org/).
@@ -43,7 +43,7 @@ Here is the requirements in order to have a happy tommy (pun intended):
 
 Let's see an example. Here a really simple API documented controller:
 
-```rails
+```ruby
 # This is the cars API. It provides ways to search and get cars.
 # Cars are simple json objects with these fields:
 #
@@ -98,7 +98,7 @@ On the root of the project, you can then run the following command:
 rdoc --format apitommy app/controllers/cars_controller.rb
 ```
 
-This will lead to a page ``API``` in your project wiki, containing this markup:
+This will lead to a page ```API``` in your project wiki, containing this markup:
 ```markdown
 # Cars
 
