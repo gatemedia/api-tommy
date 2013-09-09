@@ -11,7 +11,8 @@ class RDoc::Generator::ApiTomDoc
     options.dry_run = true
     op = options.option_parser
     op.on('--filename FILENAME', String, 'Mandatory filename') do |filename|
-      options.filename = filename
+      options.filename = filename.gsub(/\s+/, '-')
+      options.filename = "#{options.filename}.md" unless options.filename.end_with?('.md')
     end
   end
 

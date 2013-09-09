@@ -28,6 +28,30 @@ class RDoc::Generator::ApiTomdoc < ActiveSupport::TestCase
     assert options.dry_run
   end
 
+  test 'accepts a filename option' do
+    options = RDoc::Options.new
+    options.option_parser = OptionParser.new
+    RDoc::Generator::ApiTomDoc.setup_options options
+    options.option_parser.parse(['--filename', 'foobar.md'])
+    assert_equal 'foobar.md', options.filename
+  end
+
+  test 'accepts a filename option with space' do
+    options = RDoc::Options.new
+    options.option_parser = OptionParser.new
+    RDoc::Generator::ApiTomDoc.setup_options options
+    options.option_parser.parse(['--filename', 'foo bar.md'])
+    assert_equal 'foo-bar.md', options.filename
+  end
+
+  test 'accepts a filename option without md extension' do
+    options = RDoc::Options.new
+    options.option_parser = OptionParser.new
+    RDoc::Generator::ApiTomDoc.setup_options options
+    options.option_parser.parse(['--filename', 'foobar'])
+    assert_equal 'foobar.md', options.filename
+  end
+
   test 'should correctly generate' do
     ApiTomdoc::Github.any_instance.stubs(:update_wiki)
     @generator.generate(@parsing)
