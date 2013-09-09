@@ -10,9 +10,18 @@ class RDoc::Generator::ApiTomDoc
   def self.setup_options options
     options.dry_run = true
     op = options.option_parser
-    op.on('--filename FILENAME', String, 'Mandatory filename') do |filename|
+
+    op.on('--filename FILENAME', String, 'The output filename') do |filename|
       options.filename = filename.gsub(/\s+/, '-')
       options.filename = "#{options.filename}.md" unless options.filename.end_with?('.md')
+    end
+
+    op.on('--header HEADER', String, 'The header filename') do |header|
+      options.header = header
+    end
+
+    op.on('--footer FOOTER', String, 'The footer filename') do |footer|
+      options.footer = footer
     end
   end
 
@@ -28,6 +37,9 @@ class RDoc::Generator::ApiTomDoc
         generate_class_doc(clazz)
       end
     end
+
+    @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
+    @content << File.read(@options.footer) if @options.footer
 
     FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
       ApiTomdoc::Github.new.update_wiki(@options.filename || 'API.md', @content)
@@ -104,6 +116,7 @@ class RDoc::Generator::ApiTomDoc
   end
 end
 
+# Monkey patch to add accessors
 class RDoc::Options
-  attr_accessor :filename
+  attr_accessor :filename, :header, :footer
 end

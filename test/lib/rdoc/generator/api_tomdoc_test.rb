@@ -52,9 +52,40 @@ class RDoc::Generator::ApiTomdoc < ActiveSupport::TestCase
     assert_equal 'foobar.md', options.filename
   end
 
+  test 'accepts a header option' do
+    options = RDoc::Options.new
+    options.option_parser = OptionParser.new
+    RDoc::Generator::ApiTomDoc.setup_options options
+    options.option_parser.parse(['--header', 'foobar.md'])
+    assert_equal 'foobar.md', options.header
+  end
+
+  test 'accepts a footer option' do
+    options = RDoc::Options.new
+    options.option_parser = OptionParser.new
+    RDoc::Generator::ApiTomDoc.setup_options options
+    options.option_parser.parse(['--footer', 'foobar.md'])
+    assert_equal 'foobar.md', options.footer
+  end
+
   test 'should correctly generate' do
     ApiTomdoc::Github.any_instance.stubs(:update_wiki)
     @generator.generate(@parsing)
+    @generator.content.include?('This API deals with user operations.')
+    @generator.content.include?('Get all users.')
   end
 
+  test 'should correctly generate with header and footer' do
+    ApiTomdoc::Github.any_instance.stubs(:update_wiki)
+    @generator.options.header = 'test/fixtures/header.md'
+    @generator.options.footer = 'test/fixtures/footer.md'
+    @generator.generate(@parsing)
+
+    assert @generator.content.include?('This is the header')
+    assert @generator.content.include?('This is the footer')
+  end
+end
+
+class RDoc::Generator::ApiTomDoc
+  attr_accessor :options, :content
 end
