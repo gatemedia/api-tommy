@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'api_tommy/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'api_tomdoc'
+  spec.name          = 'api_tommy'
   spec.version       = ApiTommy::VERSION
   spec.authors       = ['David Fernandez']
   spec.email         = ['david.fernandez@gatemedia.ch']
-  spec.description   = 'This generator takes one or several rails controllers with comments formatted in TomDoc and spits out a single Markdown file'
-  spec.summary       = 'An API documentation generator.'
+  spec.description   = 'This generator takes one or several classes with comments formatted in TomDoc and spits out a single Markdown file'
+  spec.summary       = 'An API documentation generator based on RDoc and TomDoc'
   spec.homepage      = 'https://github.com/gatemedia'
   spec.license       = 'MIT'
 

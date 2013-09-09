@@ -2,7 +2,6 @@ require 'test_helper'
 
 module ApiTommy
   class MarkdownTest < ActiveSupport::TestCase
-
     def setup
       @h = ApiTommy::Markdown
     end

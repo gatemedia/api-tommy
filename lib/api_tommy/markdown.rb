@@ -1,6 +1,5 @@
 module ApiTommy
   class Markdown
-
     1.upto(6).each do |level|
       self.class.send(:define_method, "h#{level}") { |text| title(text, level) }
     end

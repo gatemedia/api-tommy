@@ -3,7 +3,6 @@ require 'ostruct'
 require 'optparse'
 
 class RDoc::Generator::ApiTommyTest < ActiveSupport::TestCase
-
   def setup
     options = RDoc::Options.new
     options.generator = 'ApiTommy'
