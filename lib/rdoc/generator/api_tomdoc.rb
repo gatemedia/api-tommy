@@ -11,7 +11,7 @@ class RDoc::Generator::ApiTomDoc
     options.dry_run = true
     op = options.option_parser
     op.on('--filename FILENAME', String, 'Mandatory filename') do |filename|
-      @filename = filename
+      options.filename = filename
     end
   end
 
@@ -29,7 +29,7 @@ class RDoc::Generator::ApiTomDoc
     end
 
     FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
-      ApiTomdoc::Github.new.update_wiki(@filename || 'API.md', @content)
+      ApiTomdoc::Github.new.update_wiki(@options.filename || 'API.md', @content)
     end
   end
 
@@ -102,4 +102,7 @@ class RDoc::Generator::ApiTomDoc
     return result if result.is_a?(String)
     result.text
   end
+end
+class RDoc::Options
+  attr_accessor :filename
 end

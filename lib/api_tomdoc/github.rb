@@ -15,10 +15,12 @@ module ApiTomdoc
     end
 
     def wiki_url
+      return @wiki_url if defined?(@wiki_url)
       origin = Grit::Repo.new(Dir.pwd).config['remote.origin.url']
       if origin
-        return origin.gsub('.git', '.wiki.git')
+        @wiki_url = origin.gsub('.git', '.wiki.git')
       end
+      @wiki_url
     end
 
     def clone_wiki(dir)
