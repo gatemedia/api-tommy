@@ -42,7 +42,7 @@ class RDoc::Generator::ApiTomDoc
 
   def generate_class_header(clazz)
     @content << @h.h1(clazz.name.gsub(/Controller/, ''))
-    tomdoc = TomParse.parse(clazz.comment.split('---').first)
+    tomdoc = TomParse.parse(comment(clazz).split('---').first)
 
     @content << @h.p(tomdoc.description)
 
@@ -63,7 +63,7 @@ class RDoc::Generator::ApiTomDoc
   end
 
   def generate_method_doc(method)
-    tomdoc = TomParse.parse(method.comment)
+    tomdoc = TomParse.parse(comment(method))
 
     @content << @h.h2(tomdoc.description.split('.').first)
     @content << @h.p(tomdoc.description)
@@ -95,5 +95,11 @@ class RDoc::Generator::ApiTomDoc
         @content << @h.p(r.to_s.gsub(/Raises\s/, ''))
       end
     end
+  end
+
+  def comment(object)
+    result = object.comment
+    return result if result.is_a?(String)
+    result.text
   end
 end
