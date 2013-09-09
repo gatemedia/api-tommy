@@ -42,56 +42,55 @@ class RDoc::Generator::ApiTomDoc
 
   def generate_class_header(clazz)
     @content << @h.h1(clazz.name.gsub(/Controller/, ''))
-    tomdoc = TomParse.parse(comment(clazz).split('---').first)
+    @tomdoc = TomParse.parse(comment(clazz).split('---').first)
+    @content << @h.p(@tomdoc.description)
 
-    @content << @h.p(tomdoc.description)
+    arguments('Fields')
+    examples
+  end
 
-    unless tomdoc.arguments.empty?
-      @content << @h.h3('Fields')
+  def generate_method_doc(method)
+    @tomdoc = TomParse.parse(comment(method))
+    @content << @h.h2(@tomdoc.description.split('.').first)
+    @content << @h.p(@tomdoc.description)
+
+    returns
+    arguments
+    examples
+    raises
+  end
+
+  def arguments(title = 'Parameters')
+    unless @tomdoc.arguments.empty?
+      @content << @h.h3(title)
       @content << @h.th('Name', 'Description')
-      tomdoc.arguments.each do |a|
+      @tomdoc.arguments.each do |a|
         @content << @h.tr(a.name.to_s, a.description)
       end
     end
+  end
 
-    unless tomdoc.examples.empty?
+  def examples
+    unless @tomdoc.examples.empty?
       @content << @h.h3('Examples')
-      tomdoc.examples.each do |e|
+      @tomdoc.examples.each do |e|
         @content << @h.code(e.to_s)
       end
     end
   end
 
-  def generate_method_doc(method)
-    tomdoc = TomParse.parse(comment(method))
-
-    @content << @h.h2(tomdoc.description.split('.').first)
-    @content << @h.p(tomdoc.description)
-
-    unless tomdoc.returns.empty?
-      tomdoc.returns.each do |r|
+  def returns
+    unless @tomdoc.returns.empty?
+      @tomdoc.returns.each do |r|
         @content << @h.p(r.to_s)
       end
     end
+  end
 
-    unless tomdoc.arguments.empty?
-      @content << @h.h3('Parameters')
-      @content << @h.th('Name', 'Description')
-      tomdoc.arguments.each do |a|
-        @content << @h.tr(a.name.to_s, a.description)
-      end
-    end
-
-    unless tomdoc.examples.empty?
-      @content << @h.h3('Examples')
-      tomdoc.examples.each do |e|
-        @content << @h.code(e.to_s)
-      end
-    end
-
-    unless tomdoc.raises.empty?
+  def raises
+    unless @tomdoc.raises.empty?
       @content << @h.h3('Errors')
-      tomdoc.raises.each do |r|
+      @tomdoc.raises.each do |r|
         @content << @h.p(r.to_s.gsub(/Raises\s/, ''))
       end
     end
@@ -103,6 +102,7 @@ class RDoc::Generator::ApiTomDoc
     result.text
   end
 end
+
 class RDoc::Options
   attr_accessor :filename
 end
