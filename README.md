@@ -2,7 +2,7 @@
 
 ApiTommy is an opinionated little tool used to generate a wiki page documenting your APIs based on Rails/Rails-api.
 
-Basically, you document you classes using a standard. There is no modification in your code.
+Basically, you document your classes using a standard. There is no modification in your code.
 You then run this tool and it will automatically generate and update your github wiki.
 
 ## Installation
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install api_tomdoc
+    $ gem install api_tommy
 
 ## Usage
 
