@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'tomparse', '~> 0.4'
   spec.add_runtime_dependency 'grit', '~> 2.5'
+  spec.add_runtime_dependency 'versionomy', '~> 0.4'
 end
