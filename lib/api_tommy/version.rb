@@ -1,3 +1,3 @@
-module ApiTomdoc
+module ApiTommy
   VERSION = '0.0.1'
 end

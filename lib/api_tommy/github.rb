@@ -1,11 +1,11 @@
-require 'api_tomdoc/error'
+require 'api_tommy/error'
 require 'grit'
 require 'tmpdir'
 
-module ApiTomdoc
+module ApiTommy
   class Github
     def update_wiki(file, content)
-      Dir.mktmpdir('api_tomdoc') do |dir|
+      Dir.mktmpdir('api_tommy') do |dir|
         clone_wiki(dir)
         update_file(dir, file, content)
         push(dir, file)

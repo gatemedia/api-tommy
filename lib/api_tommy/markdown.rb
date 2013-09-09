@@ -1,4 +1,4 @@
-module ApiTomdoc
+module ApiTommy
   class Markdown
 
     1.upto(6).each do |level|

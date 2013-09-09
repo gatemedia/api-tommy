@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'api_tomdoc/version'
+require 'api_tommy/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'api_tomdoc'
-  spec.version       = ApiTomdoc::VERSION
+  spec.version       = ApiTommy::VERSION
   spec.authors       = ['David Fernandez']
   spec.email         = ['david.fernandez@gatemedia.ch']
   spec.description   = 'This generator takes one or several rails controllers with comments formatted in TomDoc and spits out a single Markdown file'

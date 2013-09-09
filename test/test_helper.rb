@@ -1,4 +1,4 @@
-require 'api_tomdoc'
+require 'api_tommy'
 require 'active_support'
 require 'minitest/autorun'
 require 'pry'

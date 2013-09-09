@@ -1,10 +1,10 @@
 require 'rdoc/rdoc'
 require 'tomparse'
 
-require 'api_tomdoc/markdown'
-require 'api_tomdoc/github'
+require 'api_tommy/markdown'
+require 'api_tommy/github'
 
-class RDoc::Generator::ApiTomDoc
+class RDoc::Generator::ApiTommy
   RDoc::RDoc.add_generator self
 
   def self.setup_options options
@@ -28,7 +28,7 @@ class RDoc::Generator::ApiTomDoc
   def initialize(options)
     @options = options
     @content = ''
-    @h = ApiTomdoc::Markdown
+    @h = ApiTommy::Markdown
   end
 
   def generate(files)
@@ -41,7 +41,7 @@ class RDoc::Generator::ApiTomDoc
     FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
       @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
       @content << File.read(@options.footer) if @options.footer
-      ApiTomdoc::Github.new.update_wiki(@options.filename || 'API.md', @content)
+      ApiTommy::Github.new.update_wiki(@options.filename || 'API.md', @content)
     end
   end
 
