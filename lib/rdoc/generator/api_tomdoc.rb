@@ -38,10 +38,9 @@ class RDoc::Generator::ApiTomDoc
       end
     end
 
-    @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
-    @content << File.read(@options.footer) if @options.footer
-
     FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
+      @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
+      @content << File.read(@options.footer) if @options.footer
       ApiTomdoc::Github.new.update_wiki(@options.filename || 'API.md', @content)
     end
   end
