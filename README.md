@@ -23,7 +23,7 @@ Or install it yourself as:
 
 Here is the requirements in order to have an happy tommy (pun intended):
 
-* The better place to document your API is your controllers.
+* The best place to document your API is your controllers.
 * Each class/method is documented using [TomDoc](http://tomdoc.org/).
 * For the class comments, here is the usage of each [TomDoc](http://tomdoc.org/) section:
   * Description: Will describe your API and the returned objects
@@ -39,6 +39,7 @@ Here is the requirements in order to have an happy tommy (pun intended):
   * Examples: Examples of how do you call your API method.
   * Raises: Will describe what exceptions can occur. Ideally, it should be http codes(eg 400, 404, ...).
 * You are using Ruby 1.9.3.
+* You are using Rails 3.x or 4.
 * Your project is hosted on github and has a wiki.
 
 Let's see an example. Here a really simple API documented controller:
