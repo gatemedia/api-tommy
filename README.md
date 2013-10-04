@@ -23,7 +23,7 @@ Or install it yourself as:
 
 Here is the requirements in order to have an happy tommy (pun intended):
 
-* The better place to document your API is your controllers.
+* The best place to document your API is your controllers.
 * Each class/method is documented using [TomDoc](http://tomdoc.org/).
 * For the class comments, here is the usage of each [TomDoc](http://tomdoc.org/) section:
   * Description: Will describe your API and the returned objects
