@@ -39,6 +39,7 @@ Here is the requirements in order to have an happy tommy (pun intended):
   * Examples: Examples of how do you call your API method.
   * Raises: Will describe what exceptions can occur. Ideally, it should be http codes(eg 400, 404, ...).
 * You are using Ruby 1.9.3.
+* You are using Rails 3.x or 4.
 * Your project is hosted on github and has a wiki.
 
 Let's see an example. Here a really simple API documented controller:
