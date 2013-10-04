@@ -1,4 +1,3 @@
-require 'api_tommy/error'
 require 'grit'
 require 'tmpdir'
 
