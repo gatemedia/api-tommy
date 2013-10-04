@@ -1,12 +1,6 @@
-require 'rdoc/rdoc'
 require 'tomparse'
 
-require 'api_tommy/markdown'
-require 'api_tommy/github'
-
-class RDoc::Generator::ApiTommy
-  RDoc::RDoc.add_generator self
-
+class ApiTommy::Generator
   def self.setup_options options
     options.dry_run = true
     op = options.option_parser
@@ -22,26 +16,6 @@ class RDoc::Generator::ApiTommy
 
     op.on('--footer FOOTER', String, 'The footer filename') do |footer|
       options.footer = footer
-    end
-  end
-
-  def initialize(options)
-    @options = options
-    @content = ''
-    @h = ApiTommy::Markdown
-  end
-
-  def generate(files)
-    files.each do |file|
-      file.classes_or_modules.uniq.each do |clazz|
-        generate_class_doc(clazz)
-      end
-    end
-
-    FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
-      @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
-      @content << File.read(@options.footer) if @options.footer
-      ApiTommy::Github.new.update_wiki(@options.filename || 'API.md', @content)
     end
   end
 
@@ -112,6 +86,37 @@ class RDoc::Generator::ApiTommy
     result = object.comment
     return result if result.is_a?(String)
     result.text
+  end
+
+  def log(message, level = :info)
+    puts "[#{level}] #{message}"
+  end
+
+  def finalize_content
+    in_doc_folder do
+      @content = "#{File.read(@options.header)}\n#{@content}" if @options.header
+      @content << File.read(@options.footer) if @options.footer
+    end
+  end
+
+  def update_wiki
+    in_doc_folder do
+      if $DEBUG_RDOC
+        filepath = File.join(%W(doc #{@options.filename || 'api_tommy'}.md))
+        log("Writing to local file: #{filepath}", :warning)
+        File.open(filepath, 'w') { |f| f.write(@content) }
+      else
+        log('Updating Github wiki...')
+        ApiTommy::Github.new.update_wiki(@options.filename || 'API.md', @content)
+      end
+      log('Done.')
+    end
+  end
+
+  def in_doc_folder
+    FileUtils.cd(Dir.pwd.end_with?('/doc')? '..' : Dir.pwd) do
+      yield
+    end
   end
 end
 
