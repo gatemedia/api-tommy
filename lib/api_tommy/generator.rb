@@ -102,7 +102,7 @@ class ApiTommy::Generator
   def update_wiki
     in_doc_folder do
       if $DEBUG_RDOC
-        filepath = File.join(%W(doc #{@options.filename || 'api_tommy'}.md))
+        filepath = File.join(%W(doc #{@options.filename || 'api_tommy.md'}))
         log("Writing to local file: #{filepath}", :warning)
         File.open(filepath, 'w') { |f| f.write(@content) }
       else

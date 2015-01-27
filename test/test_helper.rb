@@ -12,3 +12,5 @@ Minitest::Reporters.use!(Minitest::Reporters::DefaultReporter.new)
 ActiveSupport::TestCase.test_order = :random
 
 require "api_tommy"
+
+system('mkdir', '-p', 'doc')
