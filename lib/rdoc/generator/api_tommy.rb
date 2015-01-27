@@ -1,18 +1,17 @@
 class RDoc::Generator::ApiTommy < ApiTommy::Generator
   RDoc::RDoc.add_generator self
 
-  def initialize(options)
+  def initialize(store, options)
+    @store = store
     @options = options
     @content = ''
     @h = ApiTommy::Markdown
   end
 
-  def generate(files)
+  def generate
     log('Parsing and Generating doc...')
-    files.each do |file|
-      file.classes_or_modules.uniq.each do |clazz|
-        generate_class_doc(clazz)
-      end
+    @store.all_classes.each do |clazz|
+      generate_class_doc(clazz)
     end
     log('Done.')
 
