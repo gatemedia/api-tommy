@@ -5,6 +5,19 @@ ApiTommy is an opinionated little tool used to generate a wiki page documenting 
 Basically, you document your classes using a standard. There is no modification in your code.
 You then run this tool and it will automatically generate and update your github wiki.
 
+This tool depends on rdoc 4.2.x
+
+# Compatibility
+* rdoc 4.2.x
+
+This gem is built against:
+* ruby 1.9.3
+* ruby 2.0.0
+* ruby 2.1.3
+* ruby 2.2.0
+
+Other versions may or may not work.
+
 ## Installation
 
 Add this line to your application's Gemfile:
