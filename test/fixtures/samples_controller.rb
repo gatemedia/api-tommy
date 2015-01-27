@@ -29,7 +29,6 @@
 # }
 #
 class SamplesController < ApplicationController
-
   # Get all users. Must be an authenticated sysadmin.
   # Only returns JSON responses. Pagination options are available.
   #
@@ -43,6 +42,6 @@ class SamplesController < ApplicationController
   # Raises 403 if the current user is not sysadmin.
   # Raises 500 if an error occurs.
   def index
-    puts 'foobar'
+    puts "foobar"
   end
 end
