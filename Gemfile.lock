@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    api_tommy (0.0.1)
+    api_tommy (0.1.0)
       activesupport (~> 4.2)
       grit (~> 2.5)
       rdoc (~> 4.2)
