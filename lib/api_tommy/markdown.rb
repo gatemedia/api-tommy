@@ -5,7 +5,7 @@ module ApiTommy
     end
 
     def self.title(text, level)
-      "\n#{'#' * level} #{text}\n"
+      "\n#{"#" * level} #{text}\n"
     end
 
     def self.p(text)
@@ -32,7 +32,7 @@ module ApiTommy
     end
 
     def self.tr(*values)
-      ''.tap do |result|
+      "".tap do |result|
         values.each { |value| result << "| #{value} " }
         result << "\n"
       end
