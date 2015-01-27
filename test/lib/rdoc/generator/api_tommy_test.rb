@@ -1,22 +1,8 @@
-require 'test_helper'
-require 'ostruct'
-require 'optparse'
+require "test_helper"
+require "ostruct"
+require "optparse"
 
 class RDoc::Generator::ApiTommyTest < ActiveSupport::TestCase
-  def setup
-    options = RDoc::Options.new
-    options.generator = 'ApiTommy'
-    options.verbosity = 0
-    options.option_parser = OptionParser.new
-    RDoc::Generator::ApiTommy.setup_options options
-
-    rdoc = RDoc::RDoc.new
-    rdoc.options = options
-    @parsing = rdoc.parse_files(['./test/fixtures/samples_controller.rb'])
-
-    @generator = RDoc::Generator::ApiTommy.new(rdoc.options)
-  end
-
   test 'rdoc should have registered the generator' do
     assert_equal RDoc::Generator::ApiTommy, RDoc::RDoc::GENERATORS['apitommy']
   end
@@ -68,20 +54,32 @@ class RDoc::Generator::ApiTommyTest < ActiveSupport::TestCase
   end
 
   test 'should correctly generate' do
+    rdoc = RDoc::RDoc.new
+    options = rdoc.load_options
+    options.parse(%w(--format apitommy test/fixtures/samples_controller.rb))
+    RDoc::Generator::ApiTommy.setup_options(options)
+    options.verbosity = 0
     ApiTommy::Github.any_instance.stubs(:update_wiki)
-    @generator.generate(@parsing)
-    @generator.content.include?('This API deals with user operations.')
-    @generator.content.include?('Get all users.')
+    rdoc.document(options)
+    assert rdoc.generator.content.include?('This API deals with user operations.')
+    assert rdoc.generator.content.include?('Get all users.')
   end
 
   test 'should correctly generate with header and footer' do
+    rdoc = RDoc::RDoc.new
+    options = rdoc.load_options
+    options.parse(%w(
+      --format apitommy
+      --header test/fixtures/header.md
+      --footer test/fixtures/footer.md
+      test/fixtures/samples_controller.rb
+    ))
+    RDoc::Generator::ApiTommy.setup_options(options)
+    options.verbosity = 0
     ApiTommy::Github.any_instance.stubs(:update_wiki)
-    @generator.options.header = 'test/fixtures/header.md'
-    @generator.options.footer = 'test/fixtures/footer.md'
-    @generator.generate(@parsing)
-
-    assert @generator.content.include?('This is the header')
-    assert @generator.content.include?('This is the footer')
+    rdoc.document(options)
+    assert rdoc.generator.content.include?('This is the header')
+    assert rdoc.generator.content.include?('This is the footer')
   end
 end
 

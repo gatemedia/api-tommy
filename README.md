@@ -8,6 +8,7 @@ You then run this tool and it will automatically generate and update your github
 This tool depends on rdoc 4.2.x
 
 # Compatibility
+* rails 4.2.x
 * rdoc 4.2.x
 
 This gem is built against:
