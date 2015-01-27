@@ -1,4 +1,5 @@
 # ApiTommy
+[![Build Status](https://travis-ci.org/gatemedia/api-tommy.svg?branch=master)](https://travis-ci.org/gatemedia/api-tommy)
 
 ApiTommy is an opinionated little tool used to generate a wiki page documenting your APIs based on Rails/Rails-api.
 
