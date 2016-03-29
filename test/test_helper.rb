@@ -13,4 +13,4 @@ ActiveSupport::TestCase.test_order = :random
 
 require "api_tommy"
 
-system('mkdir', '-p', 'doc')
+system("mkdir", "-p", "doc")
