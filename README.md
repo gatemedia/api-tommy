@@ -13,8 +13,6 @@ This tool depends on rdoc 4.2.x
 * rdoc 4.2.x
 
 This gem is built against:
-* ruby 2.0.0
-* ruby 2.1.3
 * ruby 2.2.2
 * ruby 2.3.0
 
