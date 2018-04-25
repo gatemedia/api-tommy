@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rdoc", "~> 4.2"
   s.add_runtime_dependency "tomparse", "~> 0.4"
   s.add_runtime_dependency "grit", "~> 2.5"
-  s.add_runtime_dependency "activesupport", "~> 5.0.0.beta3"
+  s.add_runtime_dependency "activesupport", ">= 5.0.0"
 
   s.add_development_dependency "mocha", "~> 0.14"
   s.add_development_dependency "pry", "~> 0.10"
